@@ -8,7 +8,6 @@ public class Data
     public Entry[] FilterByGrade(int grade)
     {
         string filter = $"{grade}th Grade";
-        Debug.Log(filter);
         Entry[] result = null;
         if (lst_recordLst.Any(x => x.grade == filter))
             result = lst_recordLst.Where(x => x.grade == filter).ToArray();

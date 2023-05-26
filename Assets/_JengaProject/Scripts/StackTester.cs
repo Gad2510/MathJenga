@@ -16,7 +16,8 @@ public class StackTester : GameMode
 
     public void ChangeTarget(int index)
     {
-
+        if(arr_stackBuilders.Any(x=>x.int_grade==index))
+            cc_camera.Point =arr_stackBuilders.First(x=>x.int_grade==index).transform;
     }
 
     public void ShowEntryOnScreen(Entry en)
@@ -26,6 +27,7 @@ public class StackTester : GameMode
 
     protected override void LoadAssetsScene()
     {
+        cc_camera = Camera.main.transform.parent.GetComponent<CameraController>();
         //Search for builders in scene
         arr_stackBuilders = GameObject.FindGameObjectsWithTag("Builder").
             Select(x => x.GetComponent<StackBuilder>()).
@@ -33,7 +35,6 @@ public class StackTester : GameMode
         //Call the creation of building foreach
         foreach(StackBuilder stack in arr_stackBuilders)
         {
-            Debug.Log(GameManager._Instance.gameObject.name);
             Entry[] entries = GameManager._Instance.GameInfo.FilterByGrade(stack.int_grade);
             stack.BuildStructure(entries);
         }

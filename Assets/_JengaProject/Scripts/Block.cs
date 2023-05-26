@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public abstract class Block : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Entry cl_info;
 
-    // Update is called once per frame
-    void Update()
+    public abstract void TestingBlock();
+
+    public void ShowBlockInfo()
     {
-        
+        if (GameManager._Instance.Mode is StackTester)
+            ((StackTester)GameManager._Instance.Mode).ShowEntryOnScreen(cl_info);
     }
 }

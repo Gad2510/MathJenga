@@ -19,18 +19,18 @@ public class StackTester : GameMode
 
     }
 
-    public void ShowEntryOnScreen()
+    public void ShowEntryOnScreen(Entry en)
     {
 
     }
 
     protected override void LoadAssetsScene()
     {
-        Debug.Log("Hi");
+        //Search for builders in scene
         arr_stackBuilders = GameObject.FindGameObjectsWithTag("Builder").
             Select(x => x.GetComponent<StackBuilder>()).
             OrderBy(x=>x.gameObject.name).ToArray();
-
+        //Call the creation of building foreach
         foreach(StackBuilder stack in arr_stackBuilders)
         {
             Debug.Log(GameManager._Instance.gameObject.name);

@@ -6,12 +6,17 @@ public class GameManager : MonoBehaviour
 {
     //Public instance accesable to all classes
     public static GameManager _Instance;
-
+    private GameMode gm_currentMode;
     public Data sd_GameData;
     
     public Data GameInfo
     {
         get { return sd_GameData; }
+    }
+
+    public GameMode Mode
+    {
+        get { return gm_currentMode; }
     }
 
     //Runs the mathod on play to create the instance ones per scene
@@ -42,6 +47,6 @@ public class GameManager : MonoBehaviour
         sd_GameData=HttpRequest.LoadData;
         sd_GameData.SortList();
         //IT WILL CHANGE WHEN NEW MODES ARE ADDED
-        gameObject.AddComponent<StackTester>();
+        gm_currentMode=gameObject.AddComponent<StackTester>();
     }
 }

@@ -5,8 +5,14 @@ using UnityEngine;
 public abstract class Block : MonoBehaviour
 {
     public Entry cl_info;
+    protected Rigidbody rb_self;
 
+    private void Start()
+    {
+        rb_self = GetComponent<Rigidbody>();
+    }
     public abstract void TestingBlock();
+    public abstract void RestartBlock();
 
     public void ShowBlockInfo()
     {

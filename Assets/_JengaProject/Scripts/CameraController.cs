@@ -23,15 +23,31 @@ public class CameraController : MonoBehaviour
 
     private void RotateAround()
     {
-        transform.Rotate(Vector3.up, GetPlayerInputs()*f_speed);
+        Vector2 dir = GetPlayerInputs();
+        transform.Rotate(Vector3.up, dir.x*f_speed);
+        transform.Translate(Vector3.up * dir.y);
     }
 
-    private float GetPlayerInputs()
+    private Vector2 GetPlayerInputs()
     {
-        float dir=0;
+        Vector2 dir=new Vector2();
+        //Check Direction ti rotare
         if (Input.GetMouseButton(0))
         {
-            dir = Input.GetAxis("Mouse X");
+            dir.x = Input.GetAxis("Mouse X");
+            //dir.y = Input.GetAxis("Mouse Y")/10;
+        }
+        //Check input to show info
+        else if (Input.GetMouseButton(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if(Physics.Raycast(ray,out RaycastHit hit))
+            {
+                if (hit.collider.gameObject.CompareTag("Block"))
+                {
+                    hit.collider.GetComponentInParent<Block>().ShowBlockInfo();
+                }
+            }
         }
         return dir;
     }

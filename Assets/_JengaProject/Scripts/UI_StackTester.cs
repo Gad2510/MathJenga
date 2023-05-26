@@ -4,24 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UI_StackTester : MonoBehaviour
 {
-    private Button btn_6th, btn_7th, btn_8th, btn_testBuilding;
+    private Button btn_testBuilding;
+    [SerializeField]
     private TMPro.TextMeshProUGUI txt_info;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ChangeCameraTarget(int grade)
     {
         if (GameManager._Instance.Mode is StackTester)
             ((StackTester)GameManager._Instance.Mode).ChangeTarget(grade);
+    }
+
+    public void ShowBlockInfo(Entry en)
+    {
+        txt_info.gameObject.SetActive(true);
+        txt_info.SetText($"{en.grade} : {en.domain} \n {en.cluster} \n {en.standardid} : {en.standarddescription}");
+    }
+
+    public void HideInfo()
+    {
+        txt_info.gameObject.SetActive(false);
+    }
+
+    public void TestBuilding()
+    {
+        if (GameManager._Instance.Mode is StackTester)
+            ((StackTester)GameManager._Instance.Mode).TestBuilding();
     }
 }

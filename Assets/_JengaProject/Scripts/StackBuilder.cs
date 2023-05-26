@@ -7,13 +7,13 @@ public class StackBuilder : MonoBehaviour
     public int int_grade = 1;
 
     [SerializeField]
-    private GameObject go_glass, go_wood, go_stone;
+    private GameObject go_glass, go_wood, go_stone; //Reference to the prefabs 
 
-    private List<Block> lst_blocks;
+    private List<Block> lst_blocks; // A list of all the blocks that compose the structure
 
-    private WaitForSeconds wfs_interval= new WaitForSeconds(0.5f);
-    private const int int_numShakes = 6;
-    private Vector3 v3_shakeForce= new Vector3(10,0,0);
+    private WaitForSeconds wfs_interval= new WaitForSeconds(0.5f); //Set the interval between shakes
+    private const int int_numShakes = 6; //Determine how many times the structuere is going to shake
+    private Vector3 v3_shakeForce= new Vector3(10,0,0); // Set the force to be use un the shaking
 
     private Rigidbody rb_self;
     private void Start()
@@ -21,13 +21,14 @@ public class StackBuilder : MonoBehaviour
         lst_blocks = new List<Block>();
         rb_self = GetComponent<Rigidbody>();
     }
-
+    //Action all the test behaviors in the blocks
     public void TestStructure()
     {
         foreach(Block bl in lst_blocks)
         {
             bl.TestingBlock();
         }
+        //Start shaking
         StartCoroutine(StructureShake());
     }
 
@@ -36,14 +37,15 @@ public class StackBuilder : MonoBehaviour
         Vector3 origin=transform.position;
 
         for(int i =0;i< int_numShakes; i++)
-        {
+        {  
+            //Dterminate the direccion base in the number to shake back and forward
             Vector3 dir = (i % 2 == 1) ? -v3_shakeForce : v3_shakeForce;
             rb_self.AddForce(dir);
             yield return wfs_interval;
         }
 
         yield return wfs_interval;
-
+        //Reset the position of the building
         transform.position = origin;
         rb_self.velocity = Vector3.zero;
         //Reconstruct the structure
@@ -67,7 +69,7 @@ public class StackBuilder : MonoBehaviour
                 angle = 90f;
                 dir = Vector3.right * ((i % 3) - 1);
             }
-
+            //Check if is a rebuild or creation
             if (createNew)
                 CreateBlock(entries[i - 1], angle, transform.position + dir + (Vector3.up * floor));
             else

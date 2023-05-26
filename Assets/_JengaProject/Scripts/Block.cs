@@ -11,9 +11,11 @@ public abstract class Block : MonoBehaviour
     {
         rb_self = GetComponent<Rigidbody>();
     }
+    //Use in the children of the class to set all testing condition base in tis material
     public abstract void TestingBlock();
+    //Use in the children of the class to reset the blocks conditions 
     public abstract void RestartBlock();
-
+    //Use to send the info of the block to the UI through teh gamemode
     public void ShowBlockInfo()
     {
         if (GameManager._Instance.Mode is StackTester)

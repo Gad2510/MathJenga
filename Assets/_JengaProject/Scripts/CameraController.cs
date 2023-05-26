@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+
     private Transform trs_target;
     [SerializeField]
     private float f_speed;
+    //Use t set its new position
     public Transform Point
     {
         set
@@ -20,18 +22,18 @@ public class CameraController : MonoBehaviour
     {
         RotateAround();
     }
-
+    //Is use to update all the movement of the camera 
     private void RotateAround()
     {
         Vector2 dir = GetPlayerInputs();
         transform.Rotate(Vector3.up, dir.x*f_speed);
         transform.Translate(Vector3.up * dir.y);
     }
-
+    //CHECK FOR ALL PLAYER INPUTS
     private Vector2 GetPlayerInputs()
     {
         Vector2 dir=new Vector2();
-        //Check Direction ti rotare
+        //Check Direction ti rotaTe
         if (Input.GetMouseButton(0))
         {
             dir.x = Input.GetAxis("Mouse X");

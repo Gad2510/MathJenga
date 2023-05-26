@@ -1,4 +1,4 @@
-
+//A simple class to store the information of the endpoint
 [System.Serializable]
 public class Entry
 {

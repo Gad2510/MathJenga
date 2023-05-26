@@ -37,5 +37,6 @@ public class GameManager : MonoBehaviour
     public void LoadData()
     {
         sd_GameData=HttpRequest.LoadData;
+        sd_GameData.SortList();
     }
 }

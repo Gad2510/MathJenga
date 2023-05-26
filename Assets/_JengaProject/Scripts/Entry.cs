@@ -4,6 +4,7 @@ public class Entry
 {
     public int id;
     public string subject;
+    public string grade;
     public int mastery;
     public string domainid;
     public string domain;

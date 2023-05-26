@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     //Public instance accesable to all classes
     public static GameManager _Instance;
+
+    public Data sd_GameData;
     
     //Runs the mathod on play to create the instance ones per scene
     [RuntimeInitializeOnLoadMethod]
@@ -23,12 +25,17 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(HttpRequest.GetBatch());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    //All action after the data is loaded should be put here
+    public void LoadData()
+    {
+        sd_GameData=HttpRequest.LoadData;
     }
 }

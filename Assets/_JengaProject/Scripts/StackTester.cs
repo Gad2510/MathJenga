@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class StackTester : MonoBehaviour
+using System.Linq;
+public class StackTester : GameMode
 {
-    // Start is called before the first frame update
-    void Start()
+    public int int_selectStack;
+    public StackBuilder[] arr_stackBuilders;
+    private CameraController cc_camera;
+    private UI_StackTester ui_ref;
+
+    public void TestBuilding()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeTarget(int index)
     {
-        
+
     }
+
+    public void ShowEntryOnScreen()
+    {
+
+    }
+
+    protected override void LoadAssetsScene()
+    {
+        Debug.Log("Hi");
+        arr_stackBuilders = GameObject.FindGameObjectsWithTag("Builder").
+            Select(x => x.GetComponent<StackBuilder>()).
+            OrderBy(x=>x.gameObject.name).ToArray();
+
+        foreach(StackBuilder stack in arr_stackBuilders)
+        {
+            Debug.Log(GameManager._Instance.gameObject.name);
+            Entry[] entries = GameManager._Instance.GameInfo.FilterByGrade(stack.int_grade);
+            stack.BuildStructure(entries);
+        }
+    }
+
 }

@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
 
     public Data sd_GameData;
     
+    public Data GameInfo
+    {
+        get { return sd_GameData; }
+    }
+
     //Runs the mathod on play to create the instance ones per scene
     [RuntimeInitializeOnLoadMethod]
     public static void InitManager()
@@ -16,8 +21,6 @@ public class GameManager : MonoBehaviour
         //Create a new gameobject and populate with the corresponding class
         GameObject go = new GameObject("GameManager");
         _Instance= go.AddComponent<GameManager>();
-        //IT WILL CHANGE WHEN NEW MODES ARE ADDED
-        go.AddComponent<StackTester>();
         //Precent the object from been destroy in scene change
         DontDestroyOnLoad(go);
     }
@@ -38,5 +41,7 @@ public class GameManager : MonoBehaviour
     {
         sd_GameData=HttpRequest.LoadData;
         sd_GameData.SortList();
+        //IT WILL CHANGE WHEN NEW MODES ARE ADDED
+        gameObject.AddComponent<StackTester>();
     }
 }
